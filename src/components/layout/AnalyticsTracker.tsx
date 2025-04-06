@@ -30,7 +30,7 @@ const AnalyticsTracker = ({user}: AnalyticsTrackerProps) => {
                 })
             }
         } catch(e) {}
-    }, [cartId]);
+    }, [cartId, user]);
 
     useEffect(() => {
         if(!user) {
@@ -42,11 +42,11 @@ const AnalyticsTracker = ({user}: AnalyticsTrackerProps) => {
 
             if(anyWindow.umami) {
                 anyWindow.umami.identify({
-                    email: user.email,
+                    userId: user.id,
                 })
             }
         } catch(e) {}
-    }, [user])
+    }, [user]);
 
     return <></>
 }
