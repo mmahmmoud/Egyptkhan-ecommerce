@@ -76,3 +76,23 @@ export async function getProductsByCategorySlug(slug: string) {
     }
   }`, { slug })
 }
+
+// Query to search products
+export async function searchProducts(query: string) {
+  const searchQuery = `*${query}*`;
+  return client.fetch(`*[_type == "product" && (
+    title match $searchQuery || 
+    description match $searchQuery
+  )] {
+    _id,
+    title,
+    description,
+    price,
+    image,
+    category->{
+      _id,
+      title,
+      slug
+    }
+  }`, { searchQuery })
+}
